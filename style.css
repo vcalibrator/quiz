@@ -1,0 +1,721 @@
+/* =====================================================
+   CYBERPUNK QUIZ - RESPONSIVE STYLESHEET
+   ===================================================== */
+
+:root {
+  /* Cyberpunk Color Palette */
+  --primary-neon: #00ff41;
+  --secondary-neon: #ff006e;
+  --accent-cyan: #00d9ff;
+  --dark-bg: #0a0e27;
+  --darker-bg: #030712;
+  --text-primary: #00ff41;
+  --text-secondary: #b0b3c1;
+  --border-neon: #00ff41;
+  --shadow-glow: rgba(0, 255, 65, 0.3);
+  --shadow-pink: rgba(255, 0, 110, 0.3);
+  --transition-speed: 0.3s;
+}
+
+/* =====================================================
+   GLOBAL STYLES
+   ===================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Courier New', monospace;
+  background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 50%, #1a0f35 100%);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-attachment: fixed;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 255, 65, 0.02) 0px,
+      rgba(0, 255, 65, 0.02) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+  animation: scanlines 8s linear infinite;
+  z-index: 1;
+}
+
+@keyframes scanlines {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+}
+
+/* =====================================================
+   TYPOGRAPHY
+   ===================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary-neon);
+  text-shadow: 0 0 10px var(--shadow-glow),
+               0 0 20px rgba(0, 255, 65, 0.2);
+  letter-spacing: 2px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  animation: glitch 3s infinite;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+a {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  transition: all var(--transition-speed) ease;
+  text-shadow: 0 0 5px var(--accent-cyan);
+}
+
+a:hover {
+  color: var(--primary-neon);
+  text-shadow: 0 0 15px var(--primary-neon);
+}
+
+/* =====================================================
+   ANIMATIONS
+   ===================================================== */
+
+@keyframes glitch {
+  0%, 100% {
+    text-shadow: 0 0 10px var(--shadow-glow),
+                 0 0 20px rgba(0, 255, 65, 0.2);
+  }
+  25% {
+    text-shadow: -2px 0 var(--secondary-neon),
+                 2px 0 var(--accent-cyan),
+                 0 0 10px var(--shadow-glow);
+  }
+  50% {
+    text-shadow: 0 0 10px var(--shadow-glow),
+                 0 0 20px rgba(0, 255, 65, 0.2);
+  }
+  75% {
+    text-shadow: 2px 0 var(--secondary-neon),
+                 -2px 0 var(--accent-cyan),
+                 0 0 10px var(--shadow-glow);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px var(--shadow-glow),
+                inset 0 0 10px rgba(0, 255, 65, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--shadow-glow),
+                inset 0 0 20px rgba(0, 255, 65, 0.2);
+  }
+}
+
+@keyframes neon-border {
+  0%, 100% {
+    box-shadow: inset 0 0 10px rgba(0, 255, 65, 0.3),
+                0 0 10px var(--shadow-glow);
+  }
+  50% {
+    box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.5),
+                0 0 20px var(--shadow-glow);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+button, .btn {
+  background: transparent;
+  border: 2px solid var(--primary-neon);
+  color: var(--primary-neon);
+  padding: 10px 20px;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 0 10px var(--shadow-glow),
+              inset 0 0 10px rgba(0, 255, 65, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+button::before,
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-neon);
+  transition: left var(--transition-speed) ease;
+  z-index: -1;
+}
+
+button:hover, 
+.btn:hover {
+  color: var(--darker-bg);
+  box-shadow: 0 0 20px var(--shadow-glow),
+              inset 0 0 20px rgba(0, 255, 65, 0.3);
+  left: 0;
+}
+
+button:hover::before,
+.btn:hover::before {
+  left: 0;
+}
+
+button:active,
+.btn:active {
+  transform: scale(0.98);
+}
+
+button.secondary,
+.btn.secondary {
+  border-color: var(--secondary-neon);
+  color: var(--secondary-neon);
+  box-shadow: 0 0 10px var(--shadow-pink),
+              inset 0 0 10px rgba(255, 0, 110, 0.1);
+}
+
+button.secondary::before,
+.btn.secondary::before {
+  background: var(--secondary-neon);
+}
+
+button.secondary:hover,
+.btn.secondary:hover {
+  box-shadow: 0 0 20px var(--shadow-pink),
+              inset 0 0 20px rgba(255, 0, 110, 0.3);
+}
+
+/* =====================================================
+   CONTAINERS & LAYOUT
+   ===================================================== */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.card {
+  background: rgba(10, 14, 39, 0.8);
+  border: 2px solid var(--primary-neon);
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 15px var(--shadow-glow),
+              inset 0 0 15px rgba(0, 255, 65, 0.05);
+  transition: all var(--transition-speed) ease;
+  animation: slide-in 0.5s ease;
+}
+
+.card:hover {
+  box-shadow: 0 0 25px var(--shadow-glow),
+              inset 0 0 25px rgba(0, 255, 65, 0.1);
+  transform: translateY(-5px);
+}
+
+.grid {
+  display: grid;
+  gap: 20px;
+  animation: slide-in 0.6s ease;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* =====================================================
+   INPUT FIELDS & FORMS
+   ===================================================== */
+
+input,
+textarea,
+select {
+  background: rgba(3, 7, 18, 0.8);
+  border: 2px solid var(--accent-cyan);
+  color: var(--text-primary);
+  padding: 10px 15px;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  transition: all var(--transition-speed) ease;
+  box-shadow: 0 0 10px rgba(0, 217, 255, 0.2);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary-neon);
+  box-shadow: 0 0 20px var(--shadow-glow),
+              inset 0 0 10px rgba(0, 255, 65, 0.1);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--accent-cyan);
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(0, 217, 255, 0.3);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* =====================================================
+   QUIZ-SPECIFIC STYLES
+   ===================================================== */
+
+.quiz-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.quiz-header {
+  text-align: center;
+  margin-bottom: 40px;
+  border-bottom: 3px solid var(--primary-neon);
+  padding-bottom: 30px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 255, 65, 0.1);
+  border: 1px solid var(--primary-neon);
+  margin-bottom: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 10px var(--shadow-glow);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-neon), var(--accent-cyan));
+  transition: width 0.5s ease;
+  box-shadow: 0 0 10px var(--shadow-glow);
+}
+
+.question {
+  background: rgba(10, 14, 39, 0.9);
+  border: 2px solid var(--accent-cyan);
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 0 20px var(--shadow-glow);
+  animation: slide-in 0.5s ease;
+}
+
+.question-text {
+  font-size: 1.3rem;
+  color: var(--primary-neon);
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px var(--shadow-glow);
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background: rgba(3, 7, 18, 0.6);
+  border: 2px solid var(--text-secondary);
+  border-radius: 0;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  color: var(--text-secondary);
+}
+
+.option:hover {
+  background: rgba(0, 255, 65, 0.1);
+  border-color: var(--primary-neon);
+  color: var(--primary-neon);
+  box-shadow: 0 0 15px var(--shadow-glow);
+}
+
+.option input[type="radio"],
+.option input[type="checkbox"] {
+  margin-right: 15px;
+  accent-color: var(--primary-neon);
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+.option input[type="radio"]:checked + label,
+.option input[type="checkbox"]:checked + label {
+  color: var(--primary-neon);
+  font-weight: bold;
+}
+
+.option.selected {
+  background: rgba(0, 255, 65, 0.15);
+  border-color: var(--primary-neon);
+  color: var(--primary-neon);
+  box-shadow: 0 0 20px var(--shadow-glow);
+}
+
+/* =====================================================
+   RESULTS & FEEDBACK
+   ===================================================== */
+
+.result-container {
+  text-align: center;
+  padding: 40px;
+  background: rgba(10, 14, 39, 0.9);
+  border: 3px solid var(--primary-neon);
+  box-shadow: 0 0 30px var(--shadow-glow);
+  animation: pulse-glow 2s infinite;
+}
+
+.score {
+  font-size: 3rem;
+  color: var(--primary-neon);
+  margin: 20px 0;
+  text-shadow: 0 0 20px var(--shadow-glow);
+}
+
+.feedback {
+  font-size: 1.2rem;
+  color: var(--accent-cyan);
+  margin-top: 20px;
+}
+
+.feedback.success {
+  color: var(--primary-neon);
+}
+
+.feedback.warning {
+  color: #ffaa00;
+}
+
+.feedback.error {
+  color: var(--secondary-neon);
+}
+
+/* =====================================================
+   NAVIGATION
+   ===================================================== */
+
+nav {
+  background: rgba(3, 7, 18, 0.95);
+  border-bottom: 2px solid var(--primary-neon);
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 0 15px var(--shadow-glow);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: var(--text-secondary);
+  font-weight: bold;
+  position: relative;
+  transition: all var(--transition-speed) ease;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary-neon);
+  transition: width var(--transition-speed) ease;
+  box-shadow: 0 0 10px var(--shadow-glow);
+}
+
+nav a:hover {
+  color: var(--primary-neon);
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* =====================================================
+   UTILITY CLASSES
+   ===================================================== */
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mt-1 { margin-top: 10px; }
+.mt-2 { margin-top: 20px; }
+.mt-3 { margin-top: 30px; }
+.mt-4 { margin-top: 40px; }
+
+.mb-1 { margin-bottom: 10px; }
+.mb-2 { margin-bottom: 20px; }
+.mb-3 { margin-bottom: 30px; }
+.mb-4 { margin-bottom: 40px; }
+
+.p-1 { padding: 10px; }
+.p-2 { padding: 20px; }
+.p-3 { padding: 30px; }
+.p-4 { padding: 40px; }
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+/* =====================================================
+   RESPONSIVE DESIGN
+   ===================================================== */
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  .quiz-container {
+    padding: 20px 15px;
+  }
+
+  .question {
+    padding: 20px;
+  }
+
+  .options {
+    gap: 10px;
+  }
+
+  .option {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  nav ul {
+    gap: 15px;
+  }
+
+  .result-container {
+    padding: 30px 20px;
+  }
+
+  .score {
+    font-size: 2.2rem;
+  }
+
+  .grid-2,
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  button, .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 12px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  .container,
+  .quiz-container {
+    padding: 10px;
+  }
+
+  .card,
+  .question {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  .question-text {
+    font-size: 1.1rem;
+  }
+
+  .result-container {
+    padding: 20px;
+  }
+
+  .score {
+    font-size: 1.8rem;
+  }
+
+  nav ul {
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  button, .btn {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+
+  .options {
+    gap: 8px;
+  }
+
+  .option {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =====================================================
+   ACCESSIBILITY
+   ===================================================== */
+
+:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+.btn:focus-visible,
+a:focus-visible {
+  box-shadow: 0 0 15px var(--accent-cyan);
+}
+
+/* =====================================================
+   PRINT STYLES
+   ===================================================== */
+
+@media print {
+  body::before {
+    display: none;
+  }
+
+  nav {
+    display: none;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+
+  .card,
+  .question {
+    page-break-inside: avoid;
+  }
+}
