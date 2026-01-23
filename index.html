@@ -109,6 +109,13 @@
             color: #9ca3af;
             font-weight: 300;
             margin-bottom: 32px;
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.2s;
+        }
+
+        .description:hover {
+            color: #d1d5db;
         }
 
         .form-group {
@@ -216,7 +223,7 @@
 </head>
 <body>
     <div class="video-container">
-        <video id="bgVideo" autoplay loop muted playsinline preload="auto" src="static/video1.mp4"></video>
+        <video id="bgVideo" autoplay loop muted playsinline  src="static/video1.mp4"></video>
     </div>
 
     <div class="overlay"></div>
@@ -233,7 +240,7 @@
                 </div>
             </div>
 
-            <p class="description">人生游戏沙盒 · 决策支持系统</p>
+            <p class="description" id="toggleSound">人生游戏沙盒 · 决策支持系统</p>
 
             <div class="form-group">
                 <input type="text" class="form-input" id="username" placeholder="账号">
@@ -256,7 +263,8 @@
 
     <script>
         // 视频列表 - 替换为实际的本地视频路径
-        const videos = ['static/video1.mp4','static/video2.mp4','static/video3.mp4'];
+        const videos =['static/video1.mp4','static/video2.mp4','static/video3.mp4'];
+
         // 随机选择视频
         const randomIndex = Math.floor(Math.random() * videos.length);
         const videoElement = document.getElementById('bgVideo');
@@ -274,6 +282,18 @@
         const passwordInput = document.getElementById('password');
         const loginBtn = document.getElementById('loginBtn');
         const errorMessage = document.getElementById('errorMessage');
+        const toggleSound = document.getElementById('toggleSound');
+
+        // 音效切换
+        toggleSound.addEventListener('click', function() {
+            videoElement.muted = !videoElement.muted;
+            if (!videoElement.muted) {
+                // 确保视频播放（某些浏览器需要用户交互才能播放有声音的视频）
+                videoElement.play().catch(err => {
+                    console.log('视频播放失败:', err);
+                });
+            }
+        });
 
         // 显示错误信息
         function showError(message) {
